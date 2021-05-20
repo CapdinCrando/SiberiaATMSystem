@@ -5,7 +5,7 @@ local term = require("term")
 local component = require("component")
 local gpu = component.gpu
 
-local function handleAccountCreation(signal, name)
+local function handleAccountCreation(signal, _, name)
 	print(name)
 end
 
