@@ -4,7 +4,7 @@ local serialization = require("serialization")
 
 -- Download file list
 local header = "https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/"
-shell.execute("wget -f" .. header .. "downloadList.txt")
+shell.execute("wget -f " .. header .. "downloadList.txt")
 
 -- Download Files
 local tableFile = assert(io.open("downloadList.txt"))
