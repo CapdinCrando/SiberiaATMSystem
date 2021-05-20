@@ -10,11 +10,11 @@ shell.execute("wget https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSys
 
 -- Write to .shrc (for startup)
 local startFile = assert(io.open("/home/.shrc", "a"))
-startFile:write("\n/atm/updateAndStart.lua\n")
+startFile:write("\n/atm/autoStart.lua\n")
 startFile:close()
 
 -- Remove auto install script
-shell.execute("rm " .. arg(0))
+shell.execute("rm " .. shell.getPath())
 
 -- Restart computer
-computer.shutdown(true)
+--computer.shutdown(true)
