@@ -1,11 +1,17 @@
+-- Imports
 local shell = require("shell")
+local computer = require("computer")
 
--- Download Files
-local header = "https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/"
-files = {"accountApi.lua", "tableToFile.lua", "buttonApi.lua", "atm.lua"}
-for _,f in ipairs(files) do
-	shell.execute("wget " .. header .. f)
-end
+-- Create directory
+shell.execute("mkdir /atm")
 
--- Start server
-shell.execute("atm")
+-- Download autoStart script
+shell.execute("wget https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/autoStart.lua /atm/autoStart.lua")
+
+-- Write to .shrc (for startup)
+local startFile = assert(io.open("~/.shrc", "a"))
+startFile:write("\n/atm/updateAndStart.lua\n")
+startFile:close()
+
+-- Restart computer
+computer.shutdown(true)
