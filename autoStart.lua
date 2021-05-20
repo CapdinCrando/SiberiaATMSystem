@@ -2,6 +2,9 @@
 local shell = require("shell")
 local serialization = require("serialization")
 
+-- Change PWD
+shell.setWorkingDirectory("/atm/")
+
 -- Download file list
 local header = "https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/"
 shell.execute("wget -f " .. header .. "downloadList.txt")
