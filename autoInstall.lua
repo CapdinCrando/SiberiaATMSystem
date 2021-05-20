@@ -14,7 +14,7 @@ startFile:write("\n/atm/updateAndStart.lua\n")
 startFile:close()
 
 -- Remove auto install script
-shell.execute("rm /atm/autoStart.lua")
+shell.execute("rm " .. arg(0))
 
 -- Restart computer
 computer.shutdown(true)
