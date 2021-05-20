@@ -1,6 +1,7 @@
 -- Imports
 local shell = require("shell")
 local computer = require("computer")
+local process = require("process")
 
 -- Create directory
 shell.execute("mkdir /atm")
@@ -14,7 +15,7 @@ startFile:write("\n/atm/autoStart.lua\n")
 startFile:close()
 
 -- Remove auto install script
-shell.execute("rm " .. shell.getPath())
+shell.execute("rm " .. shell.resolve(process.info().path))
 
 -- Restart computer
---computer.shutdown(true)
+computer.shutdown(true)
