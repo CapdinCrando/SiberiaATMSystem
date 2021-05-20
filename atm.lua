@@ -33,4 +33,4 @@ writeTerm(28, 6, "-->")
 -- Options (Withdrawl, Deposit, Check Balance)
 
 -- Return
-os.sleep()
+os.sleep(0)
