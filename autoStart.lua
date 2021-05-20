@@ -13,7 +13,7 @@ shell.execute("wget -f " .. header .. "downloadList.txt")
 local tableFile = assert(io.open("downloadList.txt"))
 local files = serialization.unserialize(tableFile:read("*all"))
 for _,f in ipairs(files) do
-	shell.execute("wget -f" .. header .. f)
+	shell.execute("wget -f " .. header .. f)
 end
 
 -- Start server
