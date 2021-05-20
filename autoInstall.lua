@@ -13,5 +13,8 @@ local startFile = assert(io.open("~/.shrc", "a"))
 startFile:write("\n/atm/updateAndStart.lua\n")
 startFile:close()
 
+-- Remove auto install script
+shell.execute("rm /atm/autoStart.lua")
+
 -- Restart computer
 computer.shutdown(true)
