@@ -9,7 +9,7 @@ shell.execute("mkdir /atm")
 shell.execute("wget https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/autoStart.lua /atm/autoStart.lua")
 
 -- Write to .shrc (for startup)
-local startFile = assert(io.open("~/.shrc", "a"))
+local startFile = assert(io.open("/home/.shrc", "a"))
 startFile:write("\n/atm/updateAndStart.lua\n")
 startFile:close()
 
