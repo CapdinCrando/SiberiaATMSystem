@@ -2,8 +2,10 @@
 local shell = require("shell")
 local serialization = require("serialization")
 
+local programName = "atm"
+
 -- Change PWD
-shell.setWorkingDirectory("/atm/")
+shell.setWorkingDirectory("/" .. programName .. "/")
 
 -- Download file list
 local header = "https://raw.githubusercontent.com/CapdinCrando/"
@@ -19,4 +21,4 @@ for k,v in ipairs(files) do
 end
 
 -- Start server
-shell.execute("atm")
+shell.execute(programName)
