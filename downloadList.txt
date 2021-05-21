@@ -1,1 +1,10 @@
-{"accountApi.lua", "tableToFile.lua", "buttonApi.lua", "atm.lua"}
+{
+	SiberiaAccountSystem/master/ = {
+		"accountApi.lua",
+		"tableToFile.lua"
+	},
+	SiberiaATMSystem/master/ = {
+		"buttonApi.lua",
+		"atm.lua"
+	}
+}

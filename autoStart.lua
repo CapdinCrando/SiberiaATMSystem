@@ -6,14 +6,16 @@ local serialization = require("serialization")
 shell.setWorkingDirectory("/atm/")
 
 -- Download file list
-local header = "https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/"
-shell.execute("wget -f " .. header .. "downloadList.txt")
+local header = "https://raw.githubusercontent.com/CapdinCrando/"
+shell.execute("wget -f " .. header .. "SiberiaAccountSystem/master/downloadList.txt")
 
 -- Download Files
 local tableFile = assert(io.open("downloadList.txt"))
 local files = serialization.unserialize(tableFile:read("*all"))
-for _,f in ipairs(files) do
-	shell.execute("wget -f " .. header .. f)
+for k,v in ipairs(files) do
+	for _,f in ipairs(v) do
+		shell.execute("wget -f " .. header .. k .. f)
+	end
 end
 
 -- Start server
