@@ -7,7 +7,7 @@ shell.setWorkingDirectory("/atm/")
 
 -- Download file list
 local header = "https://raw.githubusercontent.com/CapdinCrando/"
-shell.execute("wget -f " .. header .. "SiberiaAccountSystem/master/downloadList.txt")
+shell.execute("wget -f " .. header .. "SiberiaATMSystem/master/downloadList.txt")
 
 -- Download Files
 local tableFile = assert(io.open("downloadList.txt"))
