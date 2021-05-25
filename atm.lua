@@ -32,7 +32,7 @@ end
 local isUsing = true
 local function exit()
 	api.clear()
-	api.cleartable()
+	api.clearTable()
 	api.label(1, 10, "Check balance")
 	-- Open door
 	os.sleep(5)
