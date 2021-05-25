@@ -14,7 +14,7 @@ shell.execute("wget -f " .. header .. "SiberiaATMSystem/master/downloadList.txt"
 -- Download Files
 local tableFile = assert(io.open("downloadList.txt"))
 local files = serialization.unserialize(tableFile:read("*all"))
-for k,v in ipairs(files) do
+for k,v in pairs(files) do
 	for _,f in ipairs(v) do
 		shell.execute("wget -f " .. header .. k .. f)
 	end
