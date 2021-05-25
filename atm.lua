@@ -11,38 +11,21 @@ end
 
 event.listen("bioReader", handleAccountCreation)
 
-local function chooseScreen()
-	api.clear()
-	api.cleartable()
-	api.label(1, 3, "Welcome, " .. c .. "!")
-	api.label(3, 3, "Please choose an action:")
-
-	api.setTable("Check balance", checkBalance, 10,20,3,5)
-	api.setTable("Withdrawl", withdrawl, 10,20,3,5)
-	api.setTable("Deposit", deposit, 10,20,3,5)
-	api.setTable("Exit", exit, 10,20,3,5)
-	api.screen()
-
-	local _, _, x, y = event.pull("touch")
-	api.checkxy(x, y)
-end
-
 local function checkBalance()
 	api.clear()
-	api.cleartable()
+	api.clearTable()
 	api.label(1, 1, "Check balance")
-	api.setTable("Check balance", checkBalance, 10,20,3,5)
 end
 
 local function withdrawl()
 	api.clear()
-	api.cleartable()
+	api.clearTable()
 	api.label(1, 1, "Withdrawl")
 end
 
 local function deposit()
 	api.clear()
-	api.cleartable()
+	api.clearTable()
 	api.label(1, 1, "Deposit")
 end
 
@@ -54,6 +37,22 @@ local function exit()
 	-- Open door
 	os.sleep(5)
 	isUsing = false
+end
+
+local function chooseScreen()
+	api.clear()
+	api.clearTable()
+	api.label(1, 3, "Welcome, " .. c .. "!")
+	api.label(1, 3, "Please choose an action:")
+
+	api.setTable("Check $", checkBalance, 2,14,3,5)
+	api.setTable("Withdrawl", withdrawl, 16,29,3,5)
+	api.setTable("Deposit", deposit, 2,14,7,9)
+	api.setTable("Exit", exit, 16,29,7,9)
+	api.screen()
+
+	local _, _, x, y = event.pull("touch")
+	api.checkxy(x, y)
 end
 
 --gpu.setResolution(30, 10)
