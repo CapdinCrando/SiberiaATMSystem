@@ -56,7 +56,7 @@ local function exit()
 	isUsing = false
 end
 
-gpu.setResolution(30, 10)
+--gpu.setResolution(30, 10)
 term.setCursorBlink(false)
 
 -- Main Loop
