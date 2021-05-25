@@ -1,9 +1,9 @@
 {
-	SiberiaAccountSystem/master/ = {
+	SiberiaAccountSystem = {
 		"accountApi.lua",
 		"tableToFile.lua"
 	},
-	SiberiaATMSystem/master/ = {
+	SiberiaATMSystem = {
 		"buttonApi.lua",
 		"atm.lua"
 	}
