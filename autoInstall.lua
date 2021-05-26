@@ -2,6 +2,7 @@
 local shell = require("shell")
 local computer = require("computer")
 local process = require("process")
+local component = require("component")
 
 local programName = "atm"
 
@@ -14,6 +15,16 @@ shell.execute("wget https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSys
 -- Write to .shrc (for startup)
 local startFile = assert(io.open("/home/.shrc", "a"))
 startFile:write("\n/" .. programName .. "/autoStart.lua\n")
+startFile:close()
+
+-- Copy serverData file
+shell.execute("cp /data/serverData /" .. programName .. "/serverData")
+
+-- Generate vendor file
+local vendorDir = "/data/vendor/"
+shell.execute("mkdir " .. vendorDir)
+local startFile = assert(io.open(vendorDir .. component.modem.address, "w"))
+startFile:write("")
 startFile:close()
 
 -- Remove auto install script
