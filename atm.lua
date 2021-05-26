@@ -26,7 +26,7 @@ local function checkBalance()
 	if response == "Account does not exist!" then
 		api.label(1, 1, response)
 	else
-		api.label(1, 1, " Account balance: $" .. response ..)
+		api.label(1, 1, " Account balance: $" .. response)
 	end
 	
 	api.setTable("Return", chooseScreen, 16,29,7,9)
