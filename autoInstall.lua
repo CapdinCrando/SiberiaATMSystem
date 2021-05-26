@@ -10,7 +10,7 @@ local programName = "atm"
 shell.execute("mkdir /".. programName)
 
 -- Download autoStart script
-shell.execute("wget https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/autoStart.lua /" .. programName .. "/autoStart.lua")
+shell.execute("wget -f https://raw.githubusercontent.com/CapdinCrando/SiberiaATMSystem/master/autoStart.lua /" .. programName .. "/autoStart.lua")
 
 -- Write to .shrc (for startup)
 local startFile = assert(io.open("/home/.shrc", "a"))
