@@ -8,6 +8,8 @@ local gpu = component.gpu
 local bankName = "Pandora National"
 local playerName = nil
 
+local chooseScreen, welcomeScreen
+
 local function handleAccountCreation(signal, _, name)
 	print(name)
 end
@@ -106,9 +108,10 @@ local function exit()
 	api.label(1, 1, "Thank you for using " .. bankName .. " Bank!")
 	-- Open door
 	os.sleep(5)
+	welcomeScreen()
 end
 
-local function chooseScreen()
+chooseScreen = function()
 	api.clear()
 	api.clearTable()
 	api.label(3, 1, "Welcome, " .. playerName .. "!")
@@ -124,12 +127,8 @@ local function chooseScreen()
 	api.checkxy(x, y)
 end
 
---gpu.setResolution(30, 10)
-term.setCursorBlink(false)
-
--- Main Loop
-while true do
-	-- State 1
+welcomeScreen = function()
+	playerName = nil
 	api.clear()
 	api.label(1, 3, "Welcome to " .. bankName .. " Bank!")
 	api.label(1, 5, "Please insert card to continue")
@@ -141,11 +140,9 @@ while true do
 	-- Needs to check account
 	-- Close door if good
 	chooseScreen()
-	isUsing = true
-	while isUsing do
-		
-
-		-- State 3
-		
-	end
 end
+
+--gpu.setResolution(30, 10)
+term.setCursorBlink(false)
+accountApi.loadFile()
+welcomeScreen
