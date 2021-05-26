@@ -145,4 +145,4 @@ end
 --gpu.setResolution(30, 10)
 term.setCursorBlink(false)
 accountApi.loadFile()
-welcomeScreen
+welcomeScreen()
