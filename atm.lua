@@ -5,7 +5,8 @@ local term = require("term")
 local component = require("component")
 local gpu = component.gpu
 
-local bankName = ""
+local bankName = "Pandora National"
+local playerName = nil
 
 local function handleAccountCreation(signal, _, name)
 	print(name)
@@ -20,7 +21,7 @@ local function checkBalance()
 	api.screen()
 
 	local a,b,c,d,e = event.pull("magData")
-	local response = accountApi.getAmount(c)
+	local response =  tostring(accountApi.getAmount(c))
 	api.clear()
 	api.clearTable()
 	if response == "Account does not exist!" then
@@ -102,7 +103,7 @@ end
 local function exit()
 	api.clear()
 	api.clearTable()
-	api.label(1, 1, "Thank you for using the Bank!")
+	api.label(1, 1, "Thank you for using " .. bankName .. " Bank!")
 	-- Open door
 	os.sleep(5)
 end
@@ -110,7 +111,7 @@ end
 local function chooseScreen()
 	api.clear()
 	api.clearTable()
-	api.label(3, 1, "Welcome, " .. c .. "!")
+	api.label(3, 1, "Welcome, " .. playerName .. "!")
 	api.label(3, 2, "Please choose an action:")
 
 	api.setTable("Check $", checkBalance, 2,14,3,5)
@@ -130,12 +131,13 @@ term.setCursorBlink(false)
 while true do
 	-- State 1
 	api.clear()
-	api.label(1, 3, "Welcome to the BankTM!")
+	api.label(1, 3, "Welcome to " .. bankName .. " Bank!")
 	api.label(1, 5, "Please insert card to continue")
 	api.label(28, 7, "-->")
 	
 	-- State 2
 	local a,b,c,d,e = event.pull("magData")
+	playerName = c
 	-- Needs to check account
 	-- Close door if good
 	chooseScreen()
