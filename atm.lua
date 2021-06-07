@@ -6,24 +6,33 @@ local component = require("component")
 local gpu = component.gpu
 
 local bankName = "Pandora National"
-local playerName = nil
 
 local chooseScreen, welcomeScreen
 
-local function handleAccountCreation(signal, _, name)
-	print(name)
-end
+local function handleAccountCreation()
+	api.clear()
+	api.clearTable()
+	api.label(1, 1, "Please press the bioscanner to create account")
+	api.label(1, 3, "--->")
+	api.screen()
 
-event.listen("bioReader", handleAccountCreation)
+	local _,_,id = event.pull("bioReader")
+	local response = accountApi.createAccount(id)
+	print('\n' .. response)
+
+	os.sleep(5)
+
+	chooseScreen()
+end
 
 local function checkBalance()
 	api.clear()
 	api.clearTable()
-	api.label(1, 1, "Please swipe card again to check balance")
+	api.label(1, 1, "Please right click scanner to check balance")
 	api.screen()
 
-	local a,b,c,d,e = event.pull("magData")
-	local response =  tostring(accountApi.getAmount(c))
+	local _,_,id = event.pull("bioReader")
+	local response = tostring(accountApi.getAmount(id))
 	api.clear()
 	api.clearTable()
 	if response == "Account does not exist!" then
@@ -47,13 +56,13 @@ local function withdrawl()
 	amount = io.read("*line")
 
 	api.clear()
-	api.label(1, 1, "Please swipe card to withdrawl amount")
+	api.label(1, 1, "Please right click scanner to withdrawl amount")
 	api.screen()
-	local a,b,c,d,e = event.pull("magData")
+	local _,_,id = event.pull("bioReader")
 
 	api.clear()
 	-- Check amount in ATM
-	local response = accountApi.transfer(c, nil, tonumber(amount))
+	local response = accountApi.transfer(id, nil, tonumber(amount))
 	if response == "Transaction successful!" then
 		
 		api.label(1, 3, "Please take your money!")
@@ -73,7 +82,7 @@ local function deposit()
 	api.clearTable()
 	-- Give box
 	api.label(1, 1, "Please deposit cash in box")
-	api.label(1, 3, "Swipe card to deposit")
+	api.label(1, 3, "Right click scanner to deposit")
 	api.label(28, 7, "-->")
 	api.screen()
 
@@ -81,13 +90,13 @@ local function deposit()
 	local amount = 1
 
 	api.clear()
-	api.label(1, 1, "Please swipe card to withdrawl amount")
+	api.label(1, 1, "Please right click scanner to withdrawl amount")
 	api.screen()
-	local a,b,c,d,e = event.pull("magData")
+	local _,_,id = event.pull("bioReader")
 
 	api.clear()
 	-- Check amount in ATM
-	local response = accountApi.transfer(nil, c, tonumber(amount))
+	local response = accountApi.transfer(nil, id, tonumber(amount))
 	if response == "Transaction successful!" then
 		
 		api.label(1, 3, "Please take your money!")
@@ -114,7 +123,7 @@ end
 chooseScreen = function()
 	api.clear()
 	api.clearTable()
-	api.label(3, 1, "Welcome, " .. playerName .. "!")
+	api.label(3, 1, "Welcome!")
 	api.label(3, 2, "Please choose an action:")
 
 	api.setTable("Check $", checkBalance, 2,14,3,5)
@@ -128,18 +137,27 @@ chooseScreen = function()
 end
 
 welcomeScreen = function()
-	playerName = nil
 	api.clear()
 	api.label(1, 3, "Welcome to " .. bankName .. " Bank!")
-	api.label(1, 5, "Please insert card to continue")
+	api.label(1, 5, "Please right click scanner to continue")
 	api.label(28, 7, "-->")
 	
 	-- State 2
-	local a,b,c,d,e = event.pull("magData")
-	playerName = c
-	-- Needs to check account
-	-- Close door if good
-	chooseScreen()
+	local _,_,id = event.pull("bioReader")
+	if(accountApi.doesAccountExist(id))
+		-- Close door if good
+		chooseScreen()
+	else
+		api.clear()
+		api.clearTable()
+		api.label(1, 1, "You do not have an account. Would you like to create one?")
+		api.setTable("Yes", handleAccountCreation, 2,14,3,5)
+		api.setTable("No", welcomeScreen, 16,29,3,5)
+		api.screen()
+
+		local _, _, x, y = event.pull("touch")
+		api.checkxy(x, y)
+	end
 end
 
 --gpu.setResolution(30, 10)
