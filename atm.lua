@@ -144,7 +144,7 @@ welcomeScreen = function()
 	
 	-- State 2
 	local _,_,id = event.pull("bioReader")
-	if(accountApi.doesAccountExist(id))
+	if accountApi.doesAccountExist(id) then
 		-- Close door if good
 		chooseScreen()
 	else
