@@ -12,11 +12,11 @@ local chooseScreen, welcomeScreen
 local function handleAccountCreation()
 	api.clear()
 	api.clearTable()
-	api.label(1, 1, "Please press the bioscanner to create account")
+	api.label(1, 1, "Please right click screen to create account")
 	api.label(1, 3, "--->")
 	api.screen()
 
-	local _,_,id = event.pull("bioReader")
+	_,_,_,_,_,id = event.pull("touch")
 	local response = accountApi.createAccount(id)
 	print('\n' .. response)
 
@@ -28,10 +28,10 @@ end
 local function checkBalance()
 	api.clear()
 	api.clearTable()
-	api.label(1, 1, "Please right click scanner to check balance")
+	api.label(1, 1, "Please right click screen to check balance")
 	api.screen()
 
-	local _,_,id = event.pull("bioReader")
+	_,_,_,_,_,id = event.pull("touch")
 	local response = tostring(accountApi.getAmount(id))
 	api.clear()
 	api.clearTable()
@@ -56,9 +56,9 @@ local function withdrawl()
 	amount = io.read("*line")
 
 	api.clear()
-	api.label(1, 1, "Please right click scanner to withdrawl amount")
+	api.label(1, 1, "Please right click screen to withdrawl amount")
 	api.screen()
-	local _,_,id = event.pull("bioReader")
+	_,_,_,_,_,id = event.pull("touch")
 
 	api.clear()
 	-- Check amount in ATM
@@ -82,7 +82,7 @@ local function deposit()
 	api.clearTable()
 	-- Give box
 	api.label(1, 1, "Please deposit cash in box")
-	api.label(1, 3, "Right click scanner to deposit")
+	api.label(1, 3, "Right click screen to deposit")
 	api.label(28, 7, "-->")
 	api.screen()
 
@@ -90,9 +90,9 @@ local function deposit()
 	local amount = 1
 
 	api.clear()
-	api.label(1, 1, "Please right click scanner to withdrawl amount")
+	api.label(1, 1, "Please right click screen to withdrawl amount")
 	api.screen()
-	local _,_,id = event.pull("bioReader")
+	_,_,_,_,_,id = event.pull("touch")
 
 	api.clear()
 	-- Check amount in ATM
@@ -139,11 +139,11 @@ end
 welcomeScreen = function()
 	api.clear()
 	api.label(1, 3, "Welcome to " .. bankName .. " Bank!")
-	api.label(1, 5, "Please right click scanner to continue")
+	api.label(1, 5, "Please right click screen to continue")
 	api.label(28, 7, "-->")
 	
 	-- State 2
-	local _,_,id = event.pull("bioReader")
+	_,_,_,_,_,id = event.pull("touch")
 	if accountApi.doesAccountExist(id) then
 		-- Close door if good
 		chooseScreen()
